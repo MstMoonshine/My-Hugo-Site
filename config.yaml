@@ -16,7 +16,7 @@ DefaultContentLanguage: en
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
-hasCJKLanguage: false
+hasCJKLanguage: true
 
 permalinks:
     post: /p/:slug/
@@ -39,7 +39,7 @@ params:
 
     sidebar:
         emoji: ❄️
-        subtitle: Join with me in a long march of reasoning...
+        subtitle: A long march of reasoning...
         avatar:
             enabled: true
             local: true
@@ -174,10 +174,10 @@ menu:
           name: Home
           url: /
           weight: -100
-          pre: home
           params:
               ### For demonstration purpose, the home link will be open in a new tab
             #   newTab: true
+            icon: home
             newTab: false
 
 related:
