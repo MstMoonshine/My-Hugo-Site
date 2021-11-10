@@ -1,9 +1,7 @@
 ---
 title: "Security"
-description: "Everything about cybersecurity"
-slug: "sec"
-# image: "hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg"
+slug: "security"
 style:
-    background: "#2a9d8f"
+    background: "#2E8B57"
     color: "#fff"
 ---
