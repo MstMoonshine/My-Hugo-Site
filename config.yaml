@@ -39,7 +39,7 @@ params:
 
     sidebar:
         emoji: ❄️
-        subtitle: A long march of reasoning...
+        subtitle: On a long march of reasoning...
         avatar:
             enabled: true
             local: true
