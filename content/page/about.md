@@ -1,13 +1,12 @@
 ---
 title: About
-description: Hugo, the world's fastest framework for building websites
+description: A PhD student in System Security.
 date: '2019-02-28'
 aliases:
-  - about-us
-  - about-hugo
+  - about-me
   - contact
 license: CC BY-NC-ND
-lastmod: '2020-10-09'
+lastmod: '2021-11-09'
 menu:
     main: 
         weight: -90
@@ -15,20 +14,17 @@ menu:
             icon: user
 ---
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Welcome to MstMoonshine's Blog!
 
-Hugo makes use of a variety of open source projects including:
+I am currently a PhD student majoring in computer science at Hong Kong University.
+My research interests include but are not restricted to system security,
+trusted execution environment, side-channel attacks, etc.
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+I got my bachelor degree from Department of Physics at Southern University of Science
+and Technology. The physics training endows me with the capability of reasoning
+everything from the very beginning, which I now enjoy a lot. Since to become a hacker
+has always been my dream, I changed my career track after graduation. So now I
+am a hacker who knows quantum mechanics 😝.
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
-
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
-
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+This blog contains my everyday thoughts on technologies, daily lives, or anything else
+interesting. You may subscibe it via RSS: {{< rss >}}
