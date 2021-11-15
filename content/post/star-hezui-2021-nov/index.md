@@ -66,7 +66,7 @@ slug: star-hezui-2021-nov
 
 ---
 
-最后附上部分完成处理的图片：
+最后附上部分完成处理的图片和视频：
 
 ![](starview2.jpeg)
 
@@ -77,6 +77,8 @@ slug: star-hezui-2021-nov
 ![](starview5.jpeg)
 
 ![后期处理时发现偶然拍到的流星](meteor.jpeg)
+
+{{< youtube RR7cHS5Hxp4 >}}
 
 ---
 
