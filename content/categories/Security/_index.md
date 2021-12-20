@@ -2,6 +2,6 @@
 title: "Security"
 slug: "security"
 style:
-    background: "#2E8B57"
+    background: "#6495ED"
     color: "#fff"
 ---

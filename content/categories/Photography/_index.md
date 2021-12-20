@@ -3,6 +3,6 @@ title: "Photography"
 slug: "photo"
 image: "cat-photography.jpeg"
 style:
-    background: "#6495ED"
+    background: "#39CCCC"
     color: "#fff"
 ---
