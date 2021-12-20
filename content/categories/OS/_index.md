@@ -2,6 +2,6 @@
 title: "Operating System"
 slug: "os"
 style:
-    background: "#8B4513"
+    background: "#00BFFF"
     color: "#fff"
 ---

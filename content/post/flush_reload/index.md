@@ -3,7 +3,7 @@ title: "[论文分享] FLUSH+RELOAD: a High Resolution, Low Noise, L3 Cache Side
 date: 2021-11-24T09:59:52+08:00
 categories: [Security]
 tags: [side-channel, attack, cache, hardware, paper sharing]
-slug: flush_reload
+slug: flush-reload
 ---
 
 本次分享的论文被收录于 2014 年的 USENIX Security。第一作者 Yarom 在侧信道攻击领域有很多精彩的作品。今天要介绍的 FLUSH+RELOAD 攻击是其中有代表性的一篇。这篇文章发表至今已经有近八年，其中一些技术细节已经过时，但是它可以作为一个绝妙的 demo 来展示侧信道攻击的思路，这些思路至今依然没有过时。
