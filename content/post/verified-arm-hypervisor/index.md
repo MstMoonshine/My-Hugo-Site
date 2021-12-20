@@ -26,7 +26,7 @@ slug: verified-arm-hypervisor
 
 ## Sequentially Consistent Model 和 Relaxed Memory Models
 
-《[Memory Consistency Models: A Tutorial](https://www.cs.utexas.edu/~bornholt/post/memory-models.html)》是一篇很好的博客，介绍了 memory model 中的一些基本概念。从中可以得知，最简单的多核 memory model 是 SC (Sequentially Consistent Model，别处也称SO，Sequential Ordering)，思路是将多核的执行看成是一个核的执行，强行将内存访问的执行流合并起来。比如考虑如下例子（这个经典的例子和论文中的 Example 1 一样）：
+《[Memory Consistency Models: A Tutorial](https://www.cs.utexas.edu/~bornholt/post/memory-models.html)》是一篇很好的博客文章，介绍了 memory model 中的一些基本概念。从中可以得知，最简单的多核 memory model 是 SC (Sequentially Consistent Model，别处也称SO，Sequential Ordering)，思路是将多核的执行看成是一个核的执行，强行将内存访问的执行流合并起来。比如考虑如下例子（这个经典的例子和论文中的 Example 1 一样）：
 
 ``` Python
 # Initially both global variables are 0
