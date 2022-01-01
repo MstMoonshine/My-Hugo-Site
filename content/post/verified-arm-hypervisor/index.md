@@ -51,7 +51,7 @@ B = 0
 
 SC 模型基于的假设就是程序是以 program order 执行的，并且多核之间的内存访问一定有严格的时间顺序（比如用一个无比精确的时间戳来判断）。因此 SC 并不能直接应用于现代处理器中：1. 处理器中有 cache，多个处理器并不是直接访问内存，因此不一定能严格定序；2. 现代处理器支持乱序执行，打破了 SC 的假设。而如果我们强制要求一个多核顺序处理器使用 SC 模型，它将变得非常慢，因为执行流本质上等价于一个单核处理器。
 
-那么为了解决 SC 的问题，当代处理器支持的内存模型是 Relaxed memory model，它们比 SC 放松了一些条件。其中包括 x86 的 TSO（Total Store Order）和 Arm 的（Weak Memory Model）。首先这些模型都允许 Cache 的存在。其次，TSO 要求所有的 store 指令都是顺序执行的，而 load 指令可以被 reorder；Arm 则更加放宽了条件：所有指令在满足依赖关系的前提下都可以被 reorder，因此叫做 weak memory model。相比于 TSO， weak memory model 效率更高，但是更加不稳定，因此依赖软件中显式地插入 memory barrier 指令（fence指令，像围栏一样不允许指令跨过）来保证程序执行的正确性。而无论是 TSO 还是 Weak memory model，刚刚的 example 中 00 都被认为是*正确*的结果。这个例子显然不足以区分 TSO 和 Weak memory models，因为两者都包含了所有可能的结果，而之前提到的 Arm-only Race Condition 则是一个区分二者的很好的例子。
+那么为了解决 SC 的问题，当代处理器支持的内存模型是 relaxed memory model，它们比 SC 放松了一些条件。其中包括 x86 的 TSO（Total Store Order）和 Arm 的（Weak Memory Model）。首先这些模型都允许 Cache 的存在。其次，TSO 要求所有的 store 指令都是顺序执行的，而 load 指令可以被 reorder；Arm 则更加放宽了条件：所有指令在满足依赖关系的前提下都可以被 reorder，因此叫做 weak memory model。相比于 TSO， weak memory model 效率更高，但是更加不稳定，因此依赖软件中显式地插入 memory barrier 指令（fence指令，像围栏一样不允许指令跨过）来保证程序执行的正确性。而无论是 TSO 还是 weak memory model，刚刚的 example 中 00 都被认为是*正确*的结果。这个例子显然不足以区分 TSO 和 Weak memory models，因为两者都包含了所有可能的结果，而之前提到的 Arm-only Race Condition 则是一个区分二者的很好的例子。
 
 Weak memory model 实际上也是一个统称，而不是一个具体的模型。有一些具体模型的例子，比如 RISC-V 采用的 RVWMO（RISC-V Weak Memory Ordering）、Promising model（被证明等价于 Armv8 实现的模型，但是表达较为简洁）等。
 
@@ -59,7 +59,7 @@ Weak memory model 实际上也是一个统称，而不是一个具体的模型�
 
 在初步了解了 memory model 这个有趣的概念后，我惊讶于我之前竟然从来没有听说过它，因此我便去查找相关的学术工作，其中最新的便是今天的主角，发表在 SOSP 21 的这篇文章。
 
-在这篇工作之前，已经有一些经过形式化验证的 OS/Hypervisor，比如 (a) seL4、Komodo、Serval 以及 (b) CertiKOS、AtomFS、Mailboat、SeKVM。但是 (a) 组中的工作全部都假设了单核处理器；而 (b) 组中的工作虽然支持多核，但都假设了 SC 内存模型，因此在现实机器中的正确性并不能保证。其中 CertiKOS 原文最后有相关的讨论：他们认为尽管证明是在 SC 下做的，但是 *they believe* 相同的结论对 TSO 也成立，并给出了自己的分析。因此，此前没有任何工作的形式化证明对 Arm 机器来说是适用的，谁也不能证明现有的工作中不存在 Arm-only Race conditions。
+在这篇工作之前，已经有一些经过形式化验证的 OS/Hypervisor，比如 (a) seL4、Komodo、Serval 以及 (b) CertiKOS、AtomFS、Mailboat、SeKVM。但是 (a) 组中的工作全部都假设了单核处理器；而 (b) 组中的工作虽然支持多核，但都假设了 SC 内存模型，因此在现实机器中的正确性并不能保证。其中 CertiKOS 原文最后有相关的讨论：他们认为尽管证明是在 SC 下做的，但是 *they believe* 相同的结论对 TSO 也成立，并给出了自己的分析。因此，此前没有任何工作的形式化证明对 Arm 机器来说是适用的，谁也不能证明现有的工作中不存在 Arm-only Race Conditions。
 
 但是在 Weak memory model 下形式化验证是很不容易的，因为它比 SC 弱化太多了，因此支持的可能的执行结果也更多，形式化验证的过程也就更加复杂，它要从更多硬件上*正确*的结果中判断哪些可能是不正确的。（注：形式化验证下的正确性便是开发者真正想要的正确性。）为了解决这个问题，作者认为，如果我们能给软件增加一些约束，并证明这些约束可以使得 SC 下做过的形式化验证结论对于满足约束的软件同样适用，这样我们就可以基于之前的工作实现 weak memory model 的形式化验证。
 
