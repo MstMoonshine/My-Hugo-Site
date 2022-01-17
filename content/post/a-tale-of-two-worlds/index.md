@@ -140,4 +140,4 @@ Enclave 有时候会直接将 `struct` 参数传给外界，但是 compiler 可�
 
 
 
-而当我们享用 Enclave Runtime 带来的兼容性等便利时，也需要意识到，我们将许多代码引入了我们的 TCB。即使 EAPP 开发者是技术高超的 programmer，写得全部是 bug-free 的代码，要将 EAPP 放进 enclave 中运行，也往往需要 Enclave Runtime 支持。这样看 Runtime 本身带来的 vulnerability 对 enclave 是十分巨大的。
+而当我们享用 Enclave Runtime 带来的兼容性等便利时，也需要意识到，我们将许多代码引入了我们的 TCB。即使 EAPP 开发者是技术高超的 programmer，写得全部是 bug-free 的代码，要将 EAPP 放进 enclave 中运行，也往往需要 Enclave Runtime 支持。这样看 Runtime 本身带来的 vulnerability 对 enclave 危害是十分巨大的。
