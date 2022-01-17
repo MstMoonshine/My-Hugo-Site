@@ -1,13 +1,9 @@
 ---
-title: "A Tale of Two Worlds"
+title: "[论文分享] A Tale of Two Worlds: Accessing the Vulnerability of Enclave Shielding Runtimes"
 date: 2022-01-17T16:23:28+08:00
 categories: [Security]
 tags: [attack, TEE, vulnerability]
 ---
-
-# [论文分享] A Tale of Two Worlds: Accessing the Vulnerability of Enclave Shielding Runtimes
-
-
 
 今天分享的是一篇关于 TEE runtime 安全的论文，发表在 CCS'19，作者来自于 The University of Birmingham (Flavio D. Garcia, etc) 和 KU Leuven (Frank Piessens, etc)。
 
