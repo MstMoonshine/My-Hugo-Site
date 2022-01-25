@@ -1,14 +1,20 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+* @param {string} rom_file
+* @returns {string}
 */
-export function emulate(): void;
+export function emulate(rom_file: string): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly emulate: () => void;
+  readonly emulate: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
+  readonly __wbindgen_malloc: (a: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
 /**
