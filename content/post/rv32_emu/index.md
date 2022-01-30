@@ -1,25 +1,19 @@
 ---
 title: "Rv32_emu"
 date: 2022-01-22T17:52:56+08:00
+categories: [OS]
+tags: [hardware, emulator, RISC-V]
 csp-script-src: unsafe-eval
 ---
 
-There is a tiny 32-bit RISC-V emulator embedded in this page.
+Upload your binary file here:
 
-Using [this site](https://riscvasm.lucasteske.dev/#), you can easily translate your asm code into RISC-V binary instructions.
-Paste the outputs here and click the run button to check the execution result:
+<input type="file" id="file_selector">
 
-<textarea id="rom_file" rows="10" cols="30">
-3e800093
-7d008113
-c1810193
-83018213
-3e820293
-</textarea>
+<button id="run_button" type="button" style="display: none">Run</button>
 
-<button id="run_button" type="button">Run</button>
+<code style="background:rgba(0, 0, 0, 0.0);">
+<p id="output"></p>
+</code>
 
 <script src="index.js" type="module"></script>
-
-<p id="emulate_output">
-</p>
