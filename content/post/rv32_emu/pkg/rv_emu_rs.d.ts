@@ -2,15 +2,16 @@
 /* eslint-disable */
 /**
 * @param {Uint8Array} rom_file
+* @param {number} mem_dump_size
 * @returns {string}
 */
-export function emulate(rom_file: Uint8Array): string;
+export function emulate(rom_file: Uint8Array, mem_dump_size: number): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly emulate: (a: number, b: number, c: number) => void;
+  readonly emulate: (a: number, b: number, c: number, d: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_free: (a: number, b: number) => void;

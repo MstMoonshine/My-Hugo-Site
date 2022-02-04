@@ -34,7 +34,7 @@ function readFile(file) {
 }
 
 function run() {
-	let output = emulate(romArray);
+	let output = emulate(romArray, 0x810);
 	document.getElementById("output").innerText = output;
 }
 

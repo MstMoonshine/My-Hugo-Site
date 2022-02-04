@@ -35,14 +35,15 @@ function getInt32Memory0() {
 }
 /**
 * @param {Uint8Array} rom_file
+* @param {number} mem_dump_size
 * @returns {string}
 */
-export function emulate(rom_file) {
+export function emulate(rom_file, mem_dump_size) {
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
         var ptr0 = passArray8ToWasm0(rom_file, wasm.__wbindgen_malloc);
         var len0 = WASM_VECTOR_LEN;
-        wasm.emulate(retptr, ptr0, len0);
+        wasm.emulate(retptr, ptr0, len0, mem_dump_size);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         return getStringFromWasm0(r0, r1);
