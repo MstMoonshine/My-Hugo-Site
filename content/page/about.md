@@ -16,7 +16,7 @@ menu:
 
 Welcome to MstMoonshine's Blog!
 
-I am currently a PhD student majoring in computer science at Hong Kong University.
+I am currently a PhD student majoring in computer science at the University of Hong Kong.
 My research interests include but are not restricted to system security,
 trusted execution environment, side-channel attacks, etc.
 
