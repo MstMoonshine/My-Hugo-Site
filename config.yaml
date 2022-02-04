@@ -27,7 +27,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:
+    favicon: https://avatars.githubusercontent.com/u/13410629?s=400&u=08fa8eb2d7b832eec67e06f2cff0a530237acae3&v=4
 
     footer:
         since: 2021
