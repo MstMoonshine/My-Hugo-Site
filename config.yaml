@@ -5,7 +5,7 @@ paginate: 5
 title: MstMoonshine's Blog
 
 # Change it to your Disqus shortname before using
-disqusShortname: hugo-theme-stack
+disqusShortname: mstmoonshine
 
 # GA Tracking ID
 googleAnalytics:
