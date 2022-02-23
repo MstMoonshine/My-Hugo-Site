@@ -54,11 +54,11 @@ params:
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
-        enabled: false 
-        provider: giscus
+        enabled: true
+        provider: disqus
 
         disqusjs:
-            shortname:
+            shortname: mstmoonshine
             apiUrl:
             apiKey:
             admin:
