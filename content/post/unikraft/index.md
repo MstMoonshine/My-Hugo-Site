@@ -2,7 +2,7 @@
 title: "[论文分享] Unikraft: fast, specialized unikernels the easy way"
 date: 2022-02-22T23:32:59+08:00
 categories: [OS]
-tags: [kernel, unikernel, libos, paper sharing]
+tags: [kernel, unikernel, libos, serverless, paper sharing]
 slug: unikraft
 ---
 
