@@ -12,9 +12,13 @@ EbbRT 是一个 LibOS 框架，发表在 2016 年的 OSDI 会议。作者是来�
 
 ---
 
+## EbbRT 是什么？
+
 EbbRT 是 Elastic Building Block Runtime 的缩写，它的目标是通过模块化的方式，让人们更好开发 Library OS。在这个出发点上它和 Unikraft 非常类似，不过他们的架构完全不一样。毕竟原文中我还有若干疑问没有搞清，所以我没办法直接讲一个 coherent 的故事来介绍 EbbRT。所以我决定通过列举 EbbRT 比较 nontrivial 的特点来介绍它。
 
 首先我们 review 一下什么是 LibOS（详细的解释可以参考上一篇对 Unikraft 的介绍）。当代操作系统需要兼容各种各样的软件，而这种普适性是以牺牲性能为代价的。在 Infrastructure as a Service 时代，人们可以在云端服务器部署自己的服务，很多时候租一个服务器就只是为了 host 某个特定的服务。这时，general purpose 的 OS 就不再是必需品了，因为大部分功能可能都用不到。一个在云端取代 general purpose OS 的方案是使用 Library OS，也叫 LibOS。LibOS 是针对某个特定的 App 而定制的运行环境（也可以叫做 Runtime），只包含了该 App 所需的 OS 功能，从而大幅提升性能。在 COMPASS 公众号里，此前已经有过关于 Graphene LibOS、CubicleOS、Unikraft 的介绍，它们都是 Library OS 方向的工作。
+
+##  EbbRT 的特点
 
 EbbRT 相比于其他的 LibOS，有三个特点：
 - Distributed
@@ -59,6 +63,8 @@ EbbRT 被设计成 event-driven 是因为大多数 cloud server 的运行逻辑�
 这种 event-driven 的设计省去了 linux 中 scheduler 所占用的时间，并且更契合 cloud server 的运行逻辑。
 
 ---
+
+## 总结
 
 EbbRT 为了证明自己的通用性，将 node.js 移植进了自己的框架，从而支持了一大批 JS 后端程序。他们 claim 这个移植是一个人在两周内完成的，因此工程量很小。在 paper 列举的性能测试中，EbbRT 最多可以达到相比于 Linux 2.8 倍的加速，不过更多情况下，EbbRT 只比 Linux 有一些微小的性能提升。
 
