@@ -42,7 +42,7 @@ RustyHermit 是一个使用 Rust 开发的 Unikernel，它支持运行其他语�
 
 这篇文章的思路其实非常直接：把 Unikernel 本身分成 trusted part 和 untrusted part：trusted part 主要包含 safe Rust（以及一小部分无法避免的 unsafe Rust），untrusted part 包含 unsafe Rust 和 application。Safe Rust，unsafe Rust 和 application 三者分别有自己的 data 段、stack 和 heap，分属于不同的 MPK page group。
 
-Kernel 部分的 safe rust 中，调用一个 kernel 部分的 unsafe 代码需要经历一下步骤：
+Kernel 部分的 safe rust 中，调用一个 kernel 部分的 unsafe 代码需要经历以下步骤：
 - 保存 stack pointer
 - 切换 stack pointer 到 isolated stack
 - 修改 MPK permission
