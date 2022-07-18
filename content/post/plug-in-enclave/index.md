@@ -3,6 +3,7 @@ title: "[论文分享] Confidential Serverless Made Efficient with Plug-In Encla
 date: 2022-02-28T16:03:16+08:00
 categories: [OS, Security]
 tags: [SGX, TEE, serverless, paper sharing]
+slug: serverless-pie
 ---
 
 今天分享的是发表在 ISCA'21 的 *Confidential Serverless Made Efficient with Plug-In Enclaves*。此前跟同学的讨论中想到了用 TEE 保护 serverless computating 的 idea。在调查相关工作时发现了这一篇文章，看到作者发现又是熟悉的 IPADS 课题组。在自己还在怀疑自己想到的 idea 的合理性的时候，就发现 IPADS 已经有相关的工作成果了，这种事情已经发生了好几次了。此外，IPADS 的 Penglai TEE 也提到了在 serverless 领域的应用。

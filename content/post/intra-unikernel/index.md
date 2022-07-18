@@ -3,6 +3,7 @@ title: "[论文分享] Intra-Unikernel Isolation with Intel Memory Protection Ke
 date: 2022-07-18T11:46:30+08:00
 categories: [OS]
 tags: [libos, paper sharing, x86, MPK]
+slug: intra-unikernel-mpk
 ---
 
 ![](title.png)
