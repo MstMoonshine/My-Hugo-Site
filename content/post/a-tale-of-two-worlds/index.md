@@ -2,7 +2,7 @@
 title: "[论文分享] A Tale of Two Worlds: Accessing the Vulnerability of Enclave Shielding Runtimes"
 date: 2022-01-17T16:23:28+08:00
 categories: [Security]
-tags: [attack, TEE, vulnerability]
+tags: [attack, TEE, vulnerability, paper sharing]
 slug: a-tale-of-two-worlds
 ---
 
