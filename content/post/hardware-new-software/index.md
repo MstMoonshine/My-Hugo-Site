@@ -1,5 +1,6 @@
 ---
 title: "[论文分享] Hardware is the new software"
+date: 2022-09-13T18:42:31+08:00
 categories: [Architecture]
 tags: [paper sharing, architecture, x86, SGX]
 slug: hardware-new-software
