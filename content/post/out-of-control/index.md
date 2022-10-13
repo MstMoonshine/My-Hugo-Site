@@ -72,7 +72,7 @@ CFI 下的 gadgets 看起来要更“大”一些，往往是一个基本块最�
 
 ![按类型统计](gadgets-type.png)
 
-![按调用的特殊函数统计](gadgets-func.pngpng)
+![按调用的特殊函数统计](gadgets-func.png)
 
 可见即使在 CFI 保护下，可用的 gadgets 还是很多的。作者使用这些 gadgets 构造了一个 PoC，详细信息可以阅读原文。
 
