@@ -4,7 +4,6 @@ date: 2022-12-14T18:48:11+08:00
 categories: [Tiny]
 tags: [blog]
 tiny: true
-draft: true
 ---
 
 **This is the first tiny post on the blog!**
