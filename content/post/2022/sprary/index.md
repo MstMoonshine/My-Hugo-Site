@@ -27,7 +27,7 @@ slug: pspray
 
 ## The SLUB Allocator
 
-Linux kernel 使用 SLUB Allocator 作为 heap allocator，比如当我们在内核中使用`kmalloc`函数的时候，就会从 SLUB Allocator 中申请到内存。与 user space 调用 `malloc`不同，内核中需要申请的对象相对比较固定，大部分情况下是一些编译器确定的常见的结构体，因此 SLUB Allocator 是利用这一点被设计出来的，它尽可能地利用到了 cache，从而提升了内核的性能。
+Linux kernel 使用 SLUB Allocator 作为 heap allocator，比如当我们在内核中使用`kmalloc`函数的时候，就会从 SLUB Allocator 中申请到内存。与 user space 调用 `malloc`不同，内核中需要申请的对象相对比较固定，大部分情况下是一些编译期确定的常见的结构体，因此 SLUB Allocator 是利用这一点被设计出来的，它尽可能地利用到了 cache，从而提升了内核的性能。
 
 下面简单介绍一下 SLUB Allocator 的结构：
 
