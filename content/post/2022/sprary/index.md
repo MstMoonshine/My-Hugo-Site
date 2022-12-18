@@ -27,11 +27,11 @@ slug: pspray
 
 ## The SLUB Allocator
 
-Linux kernel 使用 SLUB Allocator 作为 heap allocator，比如当我们在内核中使用`kmalloc`函数的时候，就会从 SLUB Allocator 中申请到内存。与 user space 调用 `malloc`不同，内核中需要申请的对象相对比较固定，大部分情况下是一些编译期确定的常见的结构体，因此 SLUB Allocator 是利用这一点被设计出来的，它尽可能地利用到了 cache，从而提升了内核的性能。
+Linux kernel 使用 SLUB Allocator 作为 heap allocator，比如当我们在内核中使用`kmalloc`函数的时候，就会从 SLUB Allocator 中申请到内存。与 user space 调用 `malloc`不同，内核中需要申请的对象相对比较固定，大部分情况下是一些编译期确定的常见的结构体，SLUB Allocator 正是利用这一点被设计出来的，它尽可能地利用到了 cache，从而提升了内核的性能。
 
 下面简单介绍一下 SLUB Allocator 的结构：
 
-- 针对每个常见的 allocation size 设置一个 `kmem_cache`，比如`kmalloc-96`、`kmalloc-128`、`kmalloc-sizeof(task_struct)`、`kmalloc-sizeof(mm_struct)`等；
+- 针对每个常见的 allocation size， SLUB 设置了一个 `kmem_cache`，比如`kmalloc-96`、`kmalloc-128`、`kmalloc-sizeof(task_struct)`、`kmalloc-sizeof(mm_struct)`等；
 
 - 对于每个 `kmem_cache`：
 
@@ -47,9 +47,9 @@ Linux kernel 使用 SLUB Allocator 作为 heap allocator，比如当我们在内
 - Medium-path #1：fast-path 未成功，说明 freelist 中已经没有空闲内存了，那么直接将该 CPU 的 pagelist promote 成 freelist，再从 freelist 中 allocate memory；
 - Medium-path #2：Medium-path #1 未成功，说明该 CPU pagelist 是空的，那么将该 CPU 的 partial list 中一个 list 变为 freelist；
 - Medium-path #3：Medium-path #2 未成功，说明 CPU 的 partial list 也空了，那么从 node 的 partial list 中拿一个作为 pagelist；
-- Slow-path：此前所有的尝试都没有成功，这时候就需要从 Buddy Allocator 中拿新的 page 出来，填充 SLUB Allocator，再进行 allocation。这条路径显著慢于之前的路径，因此被称为 **slow-path**。
+- Slow-path：此前所有的尝试都没有成功，这时候就需要从 Buddy Allocator 中拿新的 page 出来，填充 SLUB Allocator，再进行 allocation。这条路径显著慢于之前的路径，因此我们将它称为 **slow-path**。
 
-为了增加安全性，内核提供了一个`CONFIG_SLAB_FREELIST_RANDOM`选项，在 fast-path 中增加随机性，从 list 里随机取出一块内存。这样攻击者就无法轻易操控 allocation 状态，从而构造 OOB、UAF、DF 等。
+为了增加安全性，内核提供了一个`CONFIG_SLAB_FREELIST_RANDOM`选项，在 fast-path 中增加随机性，allocation 时从 list 里随机取出一个 free element。这样攻击者就无法轻易操控 allocator 的状态，从而构造 OOB、UAF、DF 等。
 
 
 
@@ -59,17 +59,17 @@ Linux kernel 使用 SLUB Allocator 作为 heap allocator，比如当我们在内
 
 ![Successful OOB](oob-success.png)
 
-![Failure OOB](oob-fail.png)
+![Failed OOB](oob-fail.png)
 
 OOB 攻击中，攻击者先 allocate 一些 target object，只要成功 overwrite 其中一个，就可以成功发动攻击。可以看到只有 vulnerable object 刚好在某个 target object 左边（低地址）的时候，才能发动攻击。失败的原因可能是 allocation 过程中的随机性，或是正好 CPU 启用了一个新的 freelist。UAF、DF 的情况类似，示意图就不在此展示了。
 
 作者进行了一些简单的数学计算，得出三种情况下成功的概率分别为：
 $$
-P_{OOB}=\frac{N-1}{2N},\\
+P_{OOB}=\frac{N-1}{2N},\\\
 P_{UAF,DF}=
-\left\{
+\left\\{
 \begin{aligned}
-\frac{N-A+1}{N}, A < N,\\
+\frac{N-A+1}{N}, A < N,\\\
 \frac{1}{N}, A \le N,
 \end{aligned}
 \right.
@@ -103,7 +103,7 @@ $$
 3. 这时候如果再allocate，则会主动触发 slow-path 再次新建一个 slab。这时候我们 allocate $N-1$个 target objects；
 4. allocate 一个 vulnerable object 填满这个新的 slab。
 
-这时候除非 vulnerable object 正好是 list 最后一个，否则攻击都能成功。因此这时候概率为 $P_{OOB}=\frac{N-1}{N}$。用类似方法使用 PSPRAY 进行 UAF、DF 攻击，理论成功率则是 $100\%$。
+这时候除非 vulnerable object 正好是 list 最后一个，否则攻击都能成功。因此这时候概率为 $P_{OOB}=\frac{N-1}{N}$。用类似方法使用 PSPRAY 进行 UAF、DF 攻击，理论成功率则是 $100\\%$。
 
 ## Evaluation Results
 
@@ -111,13 +111,13 @@ $$
 
 ![](synthetic.png)
 
-图中可以看到实际测量值和理论值有偏差，尤其是 OOB 中。这是因为除了攻击者在进行 allocation 外，系统本身在进行活动，不可避免地有 noise 导致偏离预期。但是无论什么情况下，使用 PSPRAY 的成功率都接近 $100\%$。
+图中可以看到实际测量值和理论值有偏差，尤其是 OOB 中。这是因为除了攻击者在进行 allocation 外，系统本身在进行活动，不可避免地有 noise 导致偏离预期。但是无论什么情况下，使用 PSPRAY 的成功率都接近 $100\\%$。
 
 接下来作者对 real-world vulnerability （CVE）进行了测试：
 
 ![](cve-result.png)
 
-其中 idle 代表系统中只在运行 PSPRAY 进程，busy 代表了除了 PSPRAY 外，还跑了很多 stress-ng 进程，来模拟更加杂乱的真实攻击过程。可以看到有一些漏洞在系统 busy 时，只有不到 $10\%$ 的成功率，这些漏洞以往可能会被评估为相对没有那么危险的漏洞，但是在 PSPRAY 的辅助下，都达到了接近 $100\%$ 的成功率。
+其中 idle 代表系统中只在运行 PSPRAY 进程，busy 代表了除了 PSPRAY 外，还跑了很多 stress-ng 进程，来模拟更加杂乱的真实攻击过程。可以看到有一些漏洞在系统 busy 时，只有不到 $10\\%$ 的成功率，这些漏洞以往可能会被评估为相对没有那么危险的漏洞，但是在 PSPRAY 的辅助下，都达到了接近 $100\\%$ 的成功率。
 
 最后，在防御方面，作者提出的方案是给 slow-path 增加随机性，复用 freelist index 的随机设计，触发某个 index 的时候就看看 partial list 是不是空了，要不要走 buddy allocator，而不是等到 CPU freelist 用光再逐级检测这些 list 是否为空。他们只修改了 13 行 kernel 代码就将 PSPRAY 的成功率降低到了基准线。
 
