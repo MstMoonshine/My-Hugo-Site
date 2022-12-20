@@ -17,9 +17,9 @@ The saving procedure is usually done in assembly before calling any function sin
 
 FPRs are used to support floating point operations, which require different hardware circuits from the GPRs. So they are a separate group of registers. Unlike the GPRs, the FPRs are not used by most privileged softwares since they are not computation-intensive. **So Reason 1 does not hold for FPRs.**
 
-And we are left with Reason 2. Obviously, if the premise does not hold, i.e. the system is not switching to another thread, then the context save/restore is unnecessary. This is the case for the FPRs.
+And we are left with Reason 2. Obviously, if the premise does not hold, i.e. the system is not switching to another thread, then the context save/restore is unnecessary. Therefore, the kernel should make a decision upon every context switch.
 
-Hardware might support further optimization. In RISC-V, there is a bit field `FS` in `sstatus` and `mstatus` CSRs. The bit field is 2-bit long, representing 4 states:
+In RISC-V, there is a bit field `FS` in `sstatus` and `mstatus` CSRs. The bit field is 2-bit long, representing 4 states:
 
 - 00: Off
 - 01: Initial
