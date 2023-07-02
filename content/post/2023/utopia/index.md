@@ -15,7 +15,7 @@ slug: utopia
 - 高延迟。以常见的 4 级页表为例，TLB miss 并且 cache miss 时，需要触发 4 次串行的 DRAM 访问。实验显示尽管采用 TLB、PWC（page walk cache）技术，地址转换依然占据整个 execution latency 的 50%。
 - 高缓存占用。依然以 4 级页表为例，页表本身作为 meta data 也需要占据 cache 和内存，这部分 cache 本来可以用于储存计算所需的 program data，此外，对 page table 的 DRAM request 还会频繁触发 DRAM row buffer conflicts（DRAM 内部的性能开销）。实验显示，在 data-intensive 程序中，有 53% 的 L1 cache 用于了储存 page table，并且相比于一个有完美 TLB 的系统，page table DRAM request 使得 DRAM row buffer conflicts 上升 24%。
 
-这些非常 solid 的实验数据证明了现有的 page table 设计确实还有优化空间。除了上面提到的几个最 impressive 的数据，文章使用了大量图标来论证这个 research motivation，感兴趣的同学可以去参考原文。实际上已经有一些现有工作进行优化，比如使用 hash table 来储存页表映射，但是其弊端是无法在不同的 address space 直接进行共享，从而降低了内存利用率。
+这些非常 solid 的实验数据证明了现有的 page table 设计确实还有优化空间。除了上面提到的几个最 impressive 的数据，文章使用了大量图表来论证这个 research motivation，感兴趣的同学可以去参考原文。实际上已经有一些现有工作进行优化，比如使用 hash table 来储存页表映射，但是其弊端是无法在不同的 address space 直接进行共享，从而降低了内存利用率。
 
 ## 混合方案
 
