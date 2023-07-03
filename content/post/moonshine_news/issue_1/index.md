@@ -32,7 +32,7 @@ Cape API Illustration
 
 - **AWS Nitro Enclave**: An isolated secure virtual machine provided by AWS. Everything inside the secure VM cannot be seen by the cloud service provider. **Only the user** can communicate with the secure VM using an **encrypted communication channel**.
 - **De-identify:** I tried Cape myself. Based on my experience, *de-identify* basically means replacing all personal information with some placeholders. For example, *Alice* turned into *[name_1]*, *Apple* turned into *[company_1]*, etc. It also takes care of numeric information like credit card numbers. After de-identifications, the file sent to LLM providers (like OpenAI) contains no private information.
-- **Re-identify:** **The LLM generates responses with the placeholders. And inside the enclave, the placeholders are filled back in with according to a previously recorded table.
+- **Re-identify:** The LLM generates responses with the placeholders. And inside the enclave, the placeholders are filled back in with according to a previously recorded table.
 
 **Comments:**
 
